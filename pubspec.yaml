@@ -1,0 +1,48 @@
+name: flutter_quran
+description: "Quran Package you can put in your app and it will wrk without the need for any other resource."
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # state management
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+
+
+  # local storage
+  shared_preferences: ^2.3.2
+
+  #UI
+  fluttertoast: ^8.2.8
+
+  #Tools
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+
+flutter:
+  assets:
+    - lib/assets/
+    - lib/assets/fonts/
+    - lib/assets/fonts/hafs.ttf
+    - lib/assets/jsons/
+    - lib/assets/images/
+    - lib/assets/images/surah_header.png
+
+  fonts:
+    - family: hafs
+      fonts:
+        - asset: packages/flutter_quran/assets/fonts/hafs.ttf
+
