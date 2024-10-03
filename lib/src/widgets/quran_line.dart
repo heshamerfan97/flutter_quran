@@ -1,14 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import '../app_bloc.dart';
-import '../models/ayah.dart';
-import '../models/bookmark.dart';
-import '../models/quran_page.dart';
-import '../utils/flutter_quran_utils.dart';
-import '../utils/toast_utils.dart';
-
-part 'ayah_long_click_dialog.dart';
+part of '../flutter_quran_screen.dart';
 
 class QuranLine extends StatelessWidget {
   const QuranLine(this.line, this.bookmarksAyahs, this.bookmarks,

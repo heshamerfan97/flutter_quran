@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-import '../utils/flutter_quran_utils.dart';
+part of '../flutter_quran_screen.dart';
 
 
 class BasmallahWidget extends StatelessWidget {

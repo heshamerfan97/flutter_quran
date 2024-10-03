@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-
-import '../utils/flutter_quran_utils.dart';
-import '../utils/images.dart';
+part of '../flutter_quran_screen.dart';
 
 
 class SurahHeaderWidget extends StatelessWidget {

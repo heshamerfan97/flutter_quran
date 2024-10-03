@@ -1,4 +1,4 @@
-import 'package:fluttertoast/fluttertoast.dart';
+part of '../flutter_quran_screen.dart';
 
 class ToastUtils {
   void showToast(String msg, {ToastGravity? gravity, Toast? toastLength}) {

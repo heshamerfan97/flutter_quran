@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_quran/flutter_quran.dart';
+import 'package:flutter_quran/src/utils/string_extensions.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'app_bloc.dart';
 import 'controllers/bookmarks_controller.dart';
 import 'controllers/quran_controller.dart';
-import 'models/bookmark.dart';
+import 'models/quran_constants.dart';
 import 'models/quran_page.dart';
-import 'widgets/bsmallah_widget.dart';
-import 'widgets/quran_line.dart';
-import 'widgets/quran_page_bottom_info.dart';
-import 'widgets/surah_header_widget.dart';
+part 'utils/images.dart';
+part 'utils/toast_utils.dart';
+part 'widgets/bsmallah_widget.dart';
+part 'widgets/quran_line.dart';
+part 'widgets/quran_page_bottom_info.dart';
+part 'widgets/surah_header_widget.dart';
+part 'widgets/default_drawer.dart';
+part 'widgets/ayah_long_click_dialog.dart';
 
 class FlutterQuranScreen extends StatelessWidget {
   const FlutterQuranScreen(
       {this.showBottomWidget = true,
+      this.useDefaultAppBar = true,
       this.bottomWidget,
       this.appBar,
       this.onPageChanged,
@@ -22,6 +31,9 @@ class FlutterQuranScreen extends StatelessWidget {
 
   ///[showBottomWidget] is a bool to disable or enable the default bottom widget
   final bool showBottomWidget;
+
+  ///[showBottomWidget] is a bool to disable or enable the default bottom widget
+  final bool useDefaultAppBar;
 
   ///[bottomWidget] if if provided it will replace the default bottom widget
   final Widget? bottomWidget;
@@ -40,6 +52,7 @@ class FlutterQuranScreen extends StatelessWidget {
       providers: AppBloc.providers,
       child: Scaffold(
         appBar: appBar,
+        drawer: appBar == null && useDefaultAppBar? const _DefaultDrawer():null,
         body: BlocBuilder<QuranCubit, List<QuranPage>>(
           builder: (ctx, pages) {
             return pages.isEmpty? const Center(child: CircularProgressIndicator()): Directionality(
@@ -167,6 +180,74 @@ class FlutterQuranScreen extends StatelessWidget {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class _FlutterQuranSearchScreen extends StatefulWidget {
+  const _FlutterQuranSearchScreen();
+
+  @override
+  State<_FlutterQuranSearchScreen> createState() => _FlutterQuranSearchScreenState();
+}
+
+class _FlutterQuranSearchScreenState extends State<_FlutterQuranSearchScreen> {
+
+  List<Ayah> ayahs = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('بحث'), centerTitle: true,),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              TextField(
+                onChanged: (txt) {
+                  final _ayahs = FlutterQuran().search(txt);
+                  print(ayahs.length);
+                  setState(() {
+                    ayahs = [..._ayahs];
+                  });
+                },
+                decoration: InputDecoration(
+                  border:  OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  hintText: 'بحث',
+                ),
+              ),
+              Expanded(child: ListView(
+                children: ayahs
+                    .map((ayah) => Column(
+                  children: [
+                    ListTile(
+                      title: Text(
+                        ayah.ayah.replaceAll('\n', ' '),
+                      ),
+                      subtitle: Text(ayah.surahNameAr),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        FlutterQuran().navigateToAyah(ayah);
+                      },
+                    ),
+                    Divider(
+                      color: Colors.grey,
+                      thickness: 1,
+                    ),
+                  ],
+                ))
+                    .toList(),
+              ),
+              ),
+            ],
+          ),
         ),
       ),
     );

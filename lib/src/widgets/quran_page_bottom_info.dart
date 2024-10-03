@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-
-import '../models/quran_constants.dart';
-import '../utils/flutter_quran_utils.dart';
-import '../utils/toast_utils.dart';
-import '../utils/string_extensions.dart';
+part of '../flutter_quran_screen.dart';
 
 class QuranPageBottomInfoWidget extends StatefulWidget {
   const QuranPageBottomInfoWidget({required this.surahName, required this.page, required this.hizb, super.key});

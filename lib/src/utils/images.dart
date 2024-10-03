@@ -1,3 +1,5 @@
+part of '../flutter_quran_screen.dart';
+
 class Images {
  final surahHeader = 'packages/flutter_quran/lib/assets/images/surah_header.png';
 

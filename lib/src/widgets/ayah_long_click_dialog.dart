@@ -1,4 +1,4 @@
-part of 'quran_line.dart';
+part of '../flutter_quran_screen.dart';
 
 class AyahLongClickDialog extends StatelessWidget {
   const AyahLongClickDialog(this.ayah, {super.key});
