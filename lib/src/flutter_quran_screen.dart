@@ -50,14 +50,14 @@ class FlutterQuranScreen extends StatelessWidget {
     Orientation currentOrientation = MediaQuery.of(context).orientation;
     return MultiBlocProvider(
       providers: AppBloc.providers,
-      child: Scaffold(
-        appBar: appBar,
-        drawer: appBar == null && useDefaultAppBar? const _DefaultDrawer():null,
-        body: BlocBuilder<QuranCubit, List<QuranPage>>(
-          builder: (ctx, pages) {
-            return pages.isEmpty? const Center(child: CircularProgressIndicator()): Directionality(
-              textDirection: TextDirection.rtl,
-              child: SafeArea(
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+          appBar: appBar??(useDefaultAppBar?AppBar(elevation: 0):null),
+          drawer: appBar == null && useDefaultAppBar? const _DefaultDrawer():null,
+          body: BlocBuilder<QuranCubit, List<QuranPage>>(
+            builder: (ctx, pages) {
+              return pages.isEmpty? const Center(child: CircularProgressIndicator()): SafeArea(
                 child: PageView.builder(
                   itemCount: pages.length,
                   controller: AppBloc.quranCubit.pageController,
@@ -177,9 +177,9 @@ class FlutterQuranScreen extends StatelessWidget {
                         ));
                   },
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
@@ -199,54 +199,56 @@ class _FlutterQuranSearchScreenState extends State<_FlutterQuranSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('بحث'), centerTitle: true,),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              TextField(
-                onChanged: (txt) {
-                  final _ayahs = FlutterQuran().search(txt);
-                  print(ayahs.length);
-                  setState(() {
-                    ayahs = [..._ayahs];
-                  });
-                },
-                decoration: InputDecoration(
-                  border:  OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(title: const Text('بحث'), centerTitle: true,),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                TextField(
+                  onChanged: (txt) {
+                    final searchResult = FlutterQuran().search(txt);
+                    setState(() {
+                      ayahs = [...searchResult];
+                    });
+                  },
+                  decoration: const InputDecoration(
+                    border:  OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    hintText: 'بحث',
                   ),
-                  hintText: 'بحث',
                 ),
-              ),
-              Expanded(child: ListView(
-                children: ayahs
-                    .map((ayah) => Column(
-                  children: [
-                    ListTile(
-                      title: Text(
-                        ayah.ayah.replaceAll('\n', ' '),
+                Expanded(child: ListView(
+                  children: ayahs
+                      .map((ayah) => Column(
+                    children: [
+                      ListTile(
+                        title: Text(
+                          ayah.ayah.replaceAll('\n', ' '),
+                        ),
+                        subtitle: Text(ayah.surahNameAr),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          FlutterQuran().navigateToAyah(ayah);
+                        },
                       ),
-                      subtitle: Text(ayah.surahNameAr),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                      onTap: () {
-                        Navigator.of(context).pop();
-                        FlutterQuran().navigateToAyah(ayah);
-                      },
-                    ),
-                    Divider(
-                      color: Colors.grey,
-                      thickness: 1,
-                    ),
-                  ],
-                ))
-                    .toList(),
-              ),
-              ),
-            ],
+                      const Divider(
+                        color: Colors.grey,
+                        thickness: 1,
+                      ),
+                    ],
+                  ))
+                      .toList(),
+                ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

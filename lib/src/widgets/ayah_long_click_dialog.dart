@@ -32,13 +32,12 @@ class AyahLongClickDialog extends StatelessWidget {
                     .sublist(0, 3)
                     .map((bookmark) => ListTile(
                   leading: Icon(
-                    Icons.bookmark_outline_sharp,
+                    Icons.bookmark,
                     color: Color(bookmark.colorCode),
                   ),
                   title: Text(
                     bookmark.name,
-                    style: TextStyle(
-                        color: Color(bookmark.colorCode), fontWeight: FontWeight.bold, fontSize: 16),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   onTap: () {
                     AppBloc.bookmarksCubit

@@ -40,22 +40,25 @@ class _DefaultDrawer extends StatelessWidget{
                       ),
                       children: List.generate(
                           2,
-                              (hizbIndex) => InkWell(
-                            onTap: () {
-                              FlutterQuran().navigateToHizb(
-                                (hizbIndex == 0 && jozzIndex == 0)
-                                    ? 0
-                                    : (AppBloc.quranCubit.quranStops[((jozzIndex * 2 + hizbIndex) * 4) - 1]),
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4.0),
-                              child: Text(
-                                hizbs[hizbIndex],
-                                style: const TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          )),
+                              (index)
+                              {
+                                final hizbIndex = (index == 0 && jozzIndex == 0)
+                                    ? 0:((jozzIndex * 2 + index)) ;
+                                    return InkWell(
+                                      onTap: () {
+                                        FlutterQuran().navigateToHizb(hizbIndex+1);
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4.0),
+                                        child: Text(
+                                          hizbs[hizbIndex],
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    );
+                                  }),
                     )
                   //    )
                 ),
@@ -82,26 +85,21 @@ class _DefaultDrawer extends StatelessWidget{
             title: const Text('العلامات'),
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BlocBuilder<BookmarksCubit, List<Bookmark>>(
-                builder: (context, bookmarks) {
-                  return Column(
-                    children: bookmarks
-                        .where((b) => b.page != -1)
-                        .map((bookmark) => ListTile(
-                      leading: Icon(
-                        Icons.bookmark_outline_sharp,
-                        color: Color(bookmark.colorCode),
-                      ),
-                      title: Text(
-                        bookmark.name,
-                        style:
-                        TextStyle(color: Color(bookmark.colorCode), fontWeight: FontWeight.bold, fontSize: 16),
-                      ),
-                      onTap: () => FlutterQuran().navigateToBookmark(bookmark),
-                    ))
-                        .toList(),
-                  );
-                },
+              Column(
+                children: FlutterQuran().getUsedBookmarks()
+                    .map((bookmark) => ListTile(
+                  leading: Icon(
+                    Icons.bookmark,
+                    color: Color(bookmark.colorCode),
+                  ),
+                  title: Text(
+                    bookmark.name,
+                    style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  onTap: () => FlutterQuran().navigateToBookmark(bookmark),
+                ))
+                    .toList(),
               ),
             ],
           ),

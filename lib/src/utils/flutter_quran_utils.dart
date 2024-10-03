@@ -9,9 +9,9 @@ import 'preferences/preferences_utils.dart';
 
 class FlutterQuran {
   /// [init] initializes the FlutterQuran, and must be called before starting using the package
-  init({List<Bookmark>? userBookmarks, bool overwriteBookmarks = false}) async {
+  Future<void> init({List<Bookmark>? userBookmarks, bool overwriteBookmarks = false}) async {
     PreferencesUtils().preferences = await SharedPreferences.getInstance();
-    AppBloc.quranCubit.loadQuran();
+    await AppBloc.quranCubit.loadQuran();
     AppBloc.bookmarksCubit
         .initBookmarks(userBookmarks: userBookmarks, overwrite: overwriteBookmarks);
   }
@@ -51,7 +51,7 @@ class FlutterQuran {
   /// Note that bookmark page number must be between 1 and 604
   void navigateToBookmark(Bookmark bookmark) {
     if (bookmark.page > 0 && bookmark.page <= 604) {
-      navigateToPage(bookmark.page - 1);
+      navigateToPage(bookmark.page);
     } else {
       throw Exception("Page number must be between 1 and 604");
     }
@@ -59,7 +59,7 @@ class FlutterQuran {
 
   /// [navigateToSurah] let's you navigate to any quran surah with surah number
   /// Note it receives surah number not surah index
-  void navigateToSurah(int surah) => navigateToPage(AppBloc.quranCubit.surahsStart[surah - 1]);
+  void navigateToSurah(int surah) => navigateToPage(AppBloc.quranCubit.surahsStart[surah - 1]+1);
 
   ///[getAllJozzs] returns list of all Quran jozzs' names
   List<String> getAllJozzs() =>

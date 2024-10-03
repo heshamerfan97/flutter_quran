@@ -88,6 +88,8 @@ onPageChanged: (int pageIndex) => print("Page changed: $pageIndex"),
 ),
 ```
 
+* ### You can find more in the examples
+
 <img src="./screenshots/al_fatihah.png" width="320"/> <img src="./screenshots/al_baqarah.png" width="320"/> <img src="./screenshots/al_baqarah_2.png" width="320"/>
 
 

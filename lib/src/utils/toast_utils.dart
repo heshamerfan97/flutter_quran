@@ -1,7 +1,7 @@
 part of '../flutter_quran_screen.dart';
 
 class ToastUtils {
-  void showToast(String msg, {ToastGravity? gravity, Toast? toastLength}) {
+  Future<bool?> showToast(String msg, {ToastGravity? gravity, Toast? toastLength}) =>
     Fluttertoast.showToast(
         msg: msg,
         toastLength: toastLength ?? Toast.LENGTH_SHORT,
@@ -10,7 +10,11 @@ class ToastUtils {
         //backgroundColor: Colors.grey[300],
         //textColor: const Color(0xFF643FDB),
         fontSize: 16.0);
-  }
+
+
+  Future<bool?>  hideToast() =>
+    Fluttertoast.cancel();
+
 
 
   ///Singleton factory

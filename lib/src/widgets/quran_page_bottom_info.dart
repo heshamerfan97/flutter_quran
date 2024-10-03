@@ -19,7 +19,6 @@ class _QuranPageBottomInfoWidgetState extends State<QuranPageBottomInfoWidget> {
     if (widget.hizb != null) {
       hizbText =
           '${mapNumberToHizbPart(widget.hizb!)} الحزب ${QuranConstants.quranHizbs[(widget.hizb! / 4).floor()]}';
-      Future.delayed(const Duration(milliseconds: 500)).then((value) => ToastUtils().showToast(hizbText));
     }
     super.didChangeDependencies();
   }
