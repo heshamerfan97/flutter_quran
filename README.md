@@ -153,4 +153,4 @@ FlutterQuran().hafsStyle;
 
 
 
-### You can find more features in the [Github repo](https://github.com/heshamerfan97/flutter_quran)
+### Feel free to ask a question or open an issue if needed on the [Github repo](https://github.com/heshamerfan97/flutter_quran)
