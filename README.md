@@ -26,7 +26,7 @@ and the Flutter guide for
 
 </div>
 
-# flutter_quran 
+# flutter_quran
 ### This Package allows you integrate Quran offline in your app and it will work without the need for any other resources.
 #### Note that the json used in the package to provide all quran details is from [مجمع الملك فهد لطباعة المصحف الشريف](https://qurancomplex.gov.sa/)
 
@@ -74,23 +74,23 @@ FlutterQuran().init();
 Scaffold(body: FlutterQuranScreen());
 /// or give it some options:
 FlutterQuranScreen(
-  appBar: AppBar(
-    actions: [
-      Padding(
-        padding: const EdgeInsetsDirectional.only(end: 22.0),
-        child: GestureDetector(
-          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => SearchScreen())),
-            child: Icon(Icons.search)),
-      ),
-    ],
-  ),
+appBar: AppBar(
+actions: [
+Padding(
+padding: const EdgeInsetsDirectional.only(end: 22.0),
+child: GestureDetector(
+onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => SearchScreen())),
+child: Icon(Icons.search)),
+),
+],
+),
 onPageChanged: (int pageIndex) => print("Page changed: $pageIndex"),
 ),
 ```
 
 * ### You can find more in the examples
 
-<img src="./screenshots/al_fatihah.png" width="320"/> <img src="./screenshots/al_baqarah.png" width="320"/> <img src="./screenshots/al_baqarah_2.png" width="320"/>
+<img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/al_fatihah.png?raw=true" width="320"/> <img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/al_baqarah.png?raw=true" width="320"/> <img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/al_baqarah_2.png?raw=true" width="320"/>
 
 
 ### The package provides a lot of utils like
@@ -103,7 +103,7 @@ final hizbs = FlutterQuran().getAllHizbs();
 final surahs = FlutterQuran().getAllSurahs();
 ```
 
-<img src="./screenshots/jozzs.png" width="320"/> <img src="./screenshots/hizbs.png" width="320"/> <img src="./screenshots/surahs.png" width="320"/>
+<img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/jozzs.png?raw=true" width="320"/> <img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/hizbs.png?raw=true" width="320"/> <img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/surahs.png?raw=true" width="320"/>
 
 ```dart
 /// Adding, setting, removing, getting and navigating to bookmarks
@@ -115,7 +115,7 @@ FlutterQuran().removeBookmark(bookmarkId: 0);
 FlutterQuran().navigateToBookmark(bookmark);
 ```
 
-<img src="./screenshots/bookmarks_list.png" width="320"/> <img src="./screenshots/bookmarks_list_2.png" width="320"/> <img src="./screenshots/bookmarked_ayah.png" width="320"/>
+<img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/bookmarks_list.png?raw=true" width="320"/> <img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/bookmarks_list_2.png?raw=true" width="320"/> <img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/bookmarked_ayah.png?raw=true" width="320"/>
 
 
 ```dart
@@ -133,7 +133,7 @@ TextField(
   ),
 ),
 ```
-<img src="./screenshots/search.png" width="320"/>
+<img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/search.png?raw=true" width="320"/>
 
 
 ```dart
