@@ -26,6 +26,17 @@ dependencies:
   #Tools
   intl: ^0.19.0
 
+# This package supports all platforms listed below.
+# But note that it works and fits on mobile size devices
+# Additional Screen Sizes will be supported later
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
