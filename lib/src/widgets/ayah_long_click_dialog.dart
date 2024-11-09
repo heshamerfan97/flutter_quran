@@ -31,28 +31,33 @@ class AyahLongClickDialog extends StatelessWidget {
                 ...AppBloc.bookmarksCubit.bookmarks
                     .sublist(0, 3)
                     .map((bookmark) => ListTile(
-                  leading: Icon(
-                    Icons.bookmark,
-                    color: Color(bookmark.colorCode),
-                  ),
-                  title: Text(
-                    bookmark.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  onTap: () {
-                    AppBloc.bookmarksCubit
-                        .saveBookmark(ayahId: ayah.id, page: ayah.page, bookmarkId: bookmark.id);
-                    Navigator.of(context).pop();
-                  },
-                )),
+                          leading: Icon(
+                            Icons.bookmark,
+                            color: Color(bookmark.colorCode),
+                          ),
+                          title: Text(
+                            bookmark.name,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          onTap: () {
+                            AppBloc.bookmarksCubit.saveBookmark(
+                                ayahId: ayah.id,
+                                page: ayah.page,
+                                bookmarkId: bookmark.id);
+                            Navigator.of(context).pop();
+                          },
+                        )),
                 const Divider(),
                 InkWell(
                   onTap: () {
                     Clipboard.setData(ClipboardData(
-                        text: AppBloc.quranCubit.staticPages[ayah.page - 1].ayahs
-                            .firstWhere((element) => element.id == ayah.id)
-                            .ayah))
-                        .then((value) => ToastUtils().showToast("تم النسخ الى الحافظة"));
+                            text: AppBloc
+                                .quranCubit.staticPages[ayah.page - 1].ayahs
+                                .firstWhere((element) => element.id == ayah.id)
+                                .ayah))
+                        .then((value) =>
+                            ToastUtils().showToast("تم النسخ الى الحافظة"));
                     Navigator.of(context).pop();
                   },
                   child: const ListTile(

@@ -1,14 +1,19 @@
 part of '../flutter_quran_screen.dart';
 
 class QuranPageBottomInfoWidget extends StatefulWidget {
-  const QuranPageBottomInfoWidget({required this.surahName, required this.page, required this.hizb, super.key});
+  const QuranPageBottomInfoWidget(
+      {required this.surahName,
+      required this.page,
+      required this.hizb,
+      super.key});
 
   final String surahName;
   final int page;
   final int? hizb;
 
   @override
-  State<QuranPageBottomInfoWidget> createState() => _QuranPageBottomInfoWidgetState();
+  State<QuranPageBottomInfoWidget> createState() =>
+      _QuranPageBottomInfoWidgetState();
 }
 
 class _QuranPageBottomInfoWidgetState extends State<QuranPageBottomInfoWidget> {
@@ -36,22 +41,27 @@ class _QuranPageBottomInfoWidgetState extends State<QuranPageBottomInfoWidget> {
               ? FittedBox(
                   child: Text(
                     hizbText,
-                    style: FlutterQuran().hafsStyle.copyWith(color: const Color(0xFF798FAB)),
+                    style: FlutterQuran()
+                        .hafsStyle
+                        .copyWith(color: const Color(0xFF798FAB)),
                   ),
                 )
               : null,
         ),
-        Text(widget.page.toString().toArabic(), style: const TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        )),
+        Text(widget.page.toString().toArabic(),
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            )),
         SizedBox(
           width: 100,
           height: 41,
           child: FittedBox(
             child: Text('سورة ${widget.surahName}',
-                style: FlutterQuran().hafsStyle.copyWith(color: const Color(0xFF798FAB))),
+                style: FlutterQuran()
+                    .hafsStyle
+                    .copyWith(color: const Color(0xFF798FAB))),
           ),
         ),
       ],

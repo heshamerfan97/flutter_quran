@@ -1,6 +1,5 @@
 part of '../flutter_quran_screen.dart';
 
-
 class SurahHeaderWidget extends StatelessWidget {
   const SurahHeaderWidget(this.surahName, {super.key});
 
@@ -14,12 +13,15 @@ class SurahHeaderWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       padding: const EdgeInsets.symmetric(vertical: 0.0),
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(Images().surahHeader), fit: BoxFit.fill),
+        image: DecorationImage(
+            image: AssetImage(Images().surahHeader), fit: BoxFit.fill),
       ),
       alignment: Alignment.center,
       child: Text(
         'سورة $surahName',
-        style: FlutterQuran().hafsStyle.copyWith(fontWeight: FontWeight.w600, fontSize: 18),
+        style: FlutterQuran()
+            .hafsStyle
+            .copyWith(fontWeight: FontWeight.w600, fontSize: 18),
       ),
     );
   }

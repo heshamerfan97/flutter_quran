@@ -20,11 +20,12 @@ class QuranLine extends StatelessWidget {
             return WidgetSpan(
               child: GestureDetector(
                 onLongPress: () {
-                  if(onLongPress != null) {
+                  if (onLongPress != null) {
                     onLongPress!(ayah);
-                  }
-                  else{
-                    final bookmarkId = bookmarksAyahs.contains(ayah.id) ? bookmarks[bookmarksAyahs.indexOf(ayah.id)].id : null;
+                  } else {
+                    final bookmarkId = bookmarksAyahs.contains(ayah.id)
+                        ? bookmarks[bookmarksAyahs.indexOf(ayah.id)].id
+                        : null;
                     if (bookmarkId != null) {
                       AppBloc.bookmarksCubit.removeBookmark(bookmarkId);
                     } else {
@@ -38,13 +39,15 @@ class QuranLine extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4.0),
                     color: bookmarksAyahs.contains(ayah.id)
-                        ? Color(bookmarks[bookmarksAyahs.indexOf(ayah.id)].colorCode).withOpacity(0.7)
+                        ? Color(bookmarks[bookmarksAyahs.indexOf(ayah.id)]
+                                .colorCode)
+                            .withOpacity(0.7)
                         : null,
                   ),
                   child: Text(
-                          ayah.ayah,
-                          style: FlutterQuran().hafsStyle,
-                        ),
+                    ayah.ayah,
+                    style: FlutterQuran().hafsStyle,
+                  ),
                 ),
               ),
             );
@@ -52,5 +55,4 @@ class QuranLine extends StatelessWidget {
           style: FlutterQuran().hafsStyle,
         )));
   }
-  
 }

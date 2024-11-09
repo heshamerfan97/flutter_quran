@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quran/src/app_bloc.dart';
 import 'package:flutter_quran/src/models/ayah.dart';
 import 'package:flutter_quran/src/models/bookmark.dart';
+import 'package:flutter_quran/src/models/surah.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/quran_constants.dart';
@@ -9,11 +10,12 @@ import 'preferences/preferences_utils.dart';
 
 class FlutterQuran {
   /// [init] initializes the FlutterQuran, and must be called before starting using the package
-  Future<void> init({List<Bookmark>? userBookmarks, bool overwriteBookmarks = false}) async {
+  Future<void> init(
+      {List<Bookmark>? userBookmarks, bool overwriteBookmarks = false}) async {
     PreferencesUtils().preferences = await SharedPreferences.getInstance();
     await AppBloc.quranCubit.loadQuran();
-    AppBloc.bookmarksCubit
-        .initBookmarks(userBookmarks: userBookmarks, overwrite: overwriteBookmarks);
+    AppBloc.bookmarksCubit.initBookmarks(
+        userBookmarks: userBookmarks, overwrite: overwriteBookmarks);
   }
 
   /// [getCurrentPageNumber] Returns the page number of the page that the user is currently on.
@@ -25,27 +27,34 @@ class FlutterQuran {
   /// Returns a list of all Ayahs whose text contains the given text.
   List<Ayah> search(String text) => AppBloc.quranCubit.search(text);
 
-  /// [navigateToAyah] let's you navigate to any ayah
+  /// [navigateToAyah] let's you navigate to any ayah..
+  /// It's better to call this method while Quran screen is displayed
+  /// and if it's called and the Quran screen is not displayed, the next time you
+  /// open quran screen it will start from this ayah's page
   void navigateToAyah(Ayah ayah) {
     AppBloc.quranCubit.animateToPage(ayah.page - 1);
-    AppBloc.bookmarksCubit.saveBookmark(ayahId: ayah.id, page: ayah.page, bookmarkId: 3);
+    AppBloc.bookmarksCubit
+        .saveBookmark(ayahId: ayah.id, page: ayah.page, bookmarkId: 3);
     Future.delayed(const Duration(seconds: 3))
         .then((value) => AppBloc.bookmarksCubit.removeBookmark(3));
   }
 
   /// [navigateToPage] let's you navigate to any quran page with page number
   /// Note it receives page number not page index
+  /// It's better to call this method while Quran screen is displayed
+  /// and if it's called and the Quran screen is not displayed, the next time you
+  /// open quran screen it will start from this page
   void navigateToPage(int page) => AppBloc.quranCubit.animateToPage(page - 1);
 
   /// [navigateToJozz] let's you navigate to any quran jozz with jozz number
   /// Note it receives jozz number not jozz index
-  void navigateToJozz(int jozz) =>
-      navigateToPage(jozz == 1 ? 0 : (AppBloc.quranCubit.quranStops[(jozz - 1) * 8 - 1]));
+  void navigateToJozz(int jozz) => navigateToPage(
+      jozz == 1 ? 0 : (AppBloc.quranCubit.quranStops[(jozz - 1) * 8 - 1]));
 
   /// [navigateToHizb] let's you navigate to any quran hizb with hizb number
   /// Note it receives hizb number not hizb index
-  void navigateToHizb(int hizb) =>
-      navigateToPage(hizb == 1 ? 0 : (AppBloc.quranCubit.quranStops[(hizb - 1) * 4 - 1]));
+  void navigateToHizb(int hizb) => navigateToPage(
+      hizb == 1 ? 0 : (AppBloc.quranCubit.quranStops[(hizb - 1) * 4 - 1]));
 
   /// [navigateToBookmark] let's you navigate to a certain bookmark
   /// Note that bookmark page number must be between 1 and 604
@@ -59,21 +68,31 @@ class FlutterQuran {
 
   /// [navigateToSurah] let's you navigate to any quran surah with surah number
   /// Note it receives surah number not surah index
-  void navigateToSurah(int surah) => navigateToPage(AppBloc.quranCubit.surahsStart[surah - 1]+1);
+  void navigateToSurah(int surah) =>
+      navigateToPage(AppBloc.quranCubit.surahsStart[surah - 1] + 1);
 
   ///[getAllJozzs] returns list of all Quran jozzs' names
-  List<String> getAllJozzs() =>
-      QuranConstants.quranHizbs.sublist(0, 30).map((jozz) => "الجزء $jozz").toList();
+  List<String> getAllJozzs() => QuranConstants.quranHizbs
+      .sublist(0, 30)
+      .map((jozz) => "الجزء $jozz")
+      .toList();
 
   ///[getAllHizbs] returns list of all Quran hizbs' names
-  List<String> getAllHizbs() => QuranConstants.quranHizbs.map((jozz) => "الحزب $jozz").toList();
+  List<String> getAllHizbs() =>
+      QuranConstants.quranHizbs.map((jozz) => "الحزب $jozz").toList();
+
+  /// [getSurah] let's you get a Surah with all its data
+  /// Note it receives surah number not surah index
+  Surah getSurah(int surah) => AppBloc.quranCubit.surahs[surah - 1];
 
   ///[getAllSurahs] returns list of all Quran surahs' names
-  List<String> getAllSurahs() => AppBloc.quranCubit.surahs.map((surah) => "سورة $surah").toList();
+  List<String> getAllSurahs({bool isArabic = true}) => AppBloc.quranCubit.surahs
+      .map((surah) => "سورة ${isArabic ? surah.nameAr : surah.nameEn}")
+      .toList();
 
   ///[getAllBookmarks] returns list of all bookmarks
-  List<Bookmark> getAllBookmarks() =>
-      AppBloc.bookmarksCubit.bookmarks.sublist(0, AppBloc.bookmarksCubit.bookmarks.length - 1);
+  List<Bookmark> getAllBookmarks() => AppBloc.bookmarksCubit.bookmarks
+      .sublist(0, AppBloc.bookmarksCubit.bookmarks.length - 1);
 
   ///[getUsedBookmarks] returns list of all bookmarks used and set by the user in quran pages
   List<Bookmark> getUsedBookmarks() =>
@@ -86,8 +105,10 @@ class FlutterQuran {
   /// [bookmarkId] is the id of the bookmark to be saved.
   ///
   /// You can't save a bookmark with a page number that is not between 1 and 604.
-  void setBookmark({required int ayahId, required int page, required int bookmarkId}) =>
-      AppBloc.bookmarksCubit.saveBookmark(ayahId: ayahId, page: page, bookmarkId: bookmarkId);
+  void setBookmark(
+          {required int ayahId, required int page, required int bookmarkId}) =>
+      AppBloc.bookmarksCubit
+          .saveBookmark(ayahId: ayahId, page: page, bookmarkId: bookmarkId);
 
   /// Removes a bookmark from the list of user's saved bookmarks.
   /// [bookmarkId] is the id of the bookmark to be removed.

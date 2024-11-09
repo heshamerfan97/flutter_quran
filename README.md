@@ -50,7 +50,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  flutter_quran: ^0.0.1+1
+  flutter_quran: ^0.0.2
 ```
 
 Import it:
@@ -101,6 +101,9 @@ onPageChanged: (int pageIndex) => print("Page changed: $pageIndex"),
 final jozzs = FlutterQuran().getAllJozzs();
 final hizbs = FlutterQuran().getAllHizbs();
 final surahs = FlutterQuran().getAllSurahs();
+
+/// And you can get a specific Surah's full data
+final surah = FlutterQuran().getSurah(1);
 ```
 
 <img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/jozzs.png?raw=true" width="320"/> <img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/hizbs.png?raw=true" width="320"/> <img src="https://github.com/heshamerfan97/flutter_quran/blob/master/screenshots/surahs.png?raw=true" width="320"/>

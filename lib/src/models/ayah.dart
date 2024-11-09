@@ -1,7 +1,15 @@
 import 'package:flutter_quran/src/utils/string_extensions.dart';
 
 class Ayah {
-  final int id, jozz, surahNumber, page, lineStart, lineEnd, ayahNumber, quarter, hizb;
+  final int id,
+      jozz,
+      surahNumber,
+      page,
+      lineStart,
+      lineEnd,
+      ayahNumber,
+      quarter,
+      hizb;
   final String surahNameEn, surahNameAr, ayahText;
   String ayah;
   final bool sajda;
@@ -69,7 +77,6 @@ class Ayah {
       centered: json['centered'] ?? false,
     );
   }
-
 
   factory Ayah.fromAya({
     required Ayah ayah,

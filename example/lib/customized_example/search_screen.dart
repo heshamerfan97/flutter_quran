@@ -9,7 +9,6 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-
   List<Ayah> ayahs = [];
 
   @override
@@ -17,7 +16,10 @@ class _SearchScreenState extends State<SearchScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(title: Text('بحث'), centerTitle: true,),
+        appBar: AppBar(
+          title: Text('بحث'),
+          centerTitle: true,
+        ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -32,33 +34,35 @@ class _SearchScreenState extends State<SearchScreen> {
                     });
                   },
                   decoration: InputDecoration(
-                    border:  OutlineInputBorder(
+                    border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
                     hintText: 'بحث',
                   ),
                 ),
-                Expanded(child: ListView(
+                Expanded(
+                  child: ListView(
                     children: ayahs
                         .map((ayah) => Column(
-                      children: [
-                        ListTile(
-                          title: Text(
-                            ayah.ayah.replaceAll('\n', ' '),
-                          ),
-                          subtitle: Text(ayah.surahNameAr),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                          onTap: () {
-                            Navigator.of(context).pop();
-                            FlutterQuran().navigateToAyah(ayah);
-                          },
-                        ),
-                        Divider(
-                          color: Colors.grey,
-                          thickness: 1,
-                        ),
-                      ],
-                    ))
+                              children: [
+                                ListTile(
+                                  title: Text(
+                                    ayah.ayah.replaceAll('\n', ' '),
+                                  ),
+                                  subtitle: Text(ayah.surahNameAr),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    FlutterQuran().navigateToAyah(ayah);
+                                  },
+                                ),
+                                Divider(
+                                  color: Colors.grey,
+                                  thickness: 1,
+                                ),
+                              ],
+                            ))
                         .toList(),
                   ),
                 ),

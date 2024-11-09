@@ -1,6 +1,6 @@
 part of '../flutter_quran_screen.dart';
 
-class _DefaultDrawer extends StatelessWidget{
+class _DefaultDrawer extends StatelessWidget {
   const _DefaultDrawer();
 
   @override
@@ -15,9 +15,9 @@ class _DefaultDrawer extends StatelessWidget{
             trailing: const Icon(Icons.search_outlined),
             title: const Text('بحث'),
             onTap: () async {
-             Navigator.of(context).pop();
-             Navigator.of(context)
-                 .push(MaterialPageRoute(builder: (ctx) => const _FlutterQuranSearchScreen()));
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (ctx) => const _FlutterQuranSearchScreen()));
             },
           ),
           ExpansionTile(
@@ -29,46 +29,44 @@ class _DefaultDrawer extends StatelessWidget{
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(
                     jozzs.length,
-                        (jozzIndex) =>
-                    ExpansionTile(
-                      title: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0),
-                        child: Text(
-                          jozzs[jozzIndex],
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      children: List.generate(
-                          2,
-                              (index)
-                              {
-                                final hizbIndex = (index == 0 && jozzIndex == 0)
-                                    ? 0:((jozzIndex * 2 + index)) ;
-                                    return InkWell(
-                                      onTap: () {
-                                        FlutterQuran().navigateToHizb(hizbIndex+1);
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 4.0),
-                                        child: Text(
-                                          hizbs[hizbIndex],
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                    )
-                  //    )
-                ),
+                    (jozzIndex) => ExpansionTile(
+                          title: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: Text(
+                              jozzs[jozzIndex],
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          children: List.generate(2, (index) {
+                            final hizbIndex = (index == 0 && jozzIndex == 0)
+                                ? 0
+                                : ((jozzIndex * 2 + index));
+                            return InkWell(
+                              onTap: () {
+                                FlutterQuran().navigateToHizb(hizbIndex + 1);
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4.0),
+                                child: Text(
+                                  hizbs[hizbIndex],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            );
+                          }),
+                        )
+                    //    )
+                    ),
               ),
               ExpansionTile(
                 title: const Text('السورة'),
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(
                     surahs.length,
-                        (index) => GestureDetector(
+                    (index) => GestureDetector(
                         onTap: () => FlutterQuran().navigateToSurah(index + 1),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 4.0),
@@ -86,19 +84,21 @@ class _DefaultDrawer extends StatelessWidget{
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
-                children: FlutterQuran().getUsedBookmarks()
+                children: FlutterQuran()
+                    .getUsedBookmarks()
                     .map((bookmark) => ListTile(
-                  leading: Icon(
-                    Icons.bookmark,
-                    color: Color(bookmark.colorCode),
-                  ),
-                  title: Text(
-                    bookmark.name,
-                    style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  onTap: () => FlutterQuran().navigateToBookmark(bookmark),
-                ))
+                          leading: Icon(
+                            Icons.bookmark,
+                            color: Color(bookmark.colorCode),
+                          ),
+                          title: Text(
+                            bookmark.name,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          onTap: () =>
+                              FlutterQuran().navigateToBookmark(bookmark),
+                        ))
                     .toList(),
               ),
             ],
@@ -107,5 +107,4 @@ class _DefaultDrawer extends StatelessWidget{
       ),
     );
   }
-
 }

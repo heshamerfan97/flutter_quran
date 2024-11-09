@@ -1,6 +1,5 @@
 part of '../flutter_quran_screen.dart';
 
-
 class BasmallahWidget extends StatelessWidget {
   const BasmallahWidget({super.key});
 

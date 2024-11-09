@@ -5,9 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-
   late QuranRepository quranRepository;
-
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
@@ -15,8 +13,7 @@ void main() {
     quranRepository = QuranRepository();
   });
 
-  test('Saving and getting Last page', () async{
-
+  test('Saving and getting Last page', () async {
     const pageToSave = 19;
     final res = await quranRepository.saveLastPage(pageToSave);
     expect(true, res);
@@ -25,11 +22,11 @@ void main() {
     expect(pageToSave, page);
   });
 
-
-
-  test('Saving and getting Bookmarks', () async{
-
-    final List<Bookmark> bookmarks = [Bookmark(id: 0, colorCode: 0xFF000000, name: "Black bookmark"), Bookmark(id: 1, colorCode: 0xFFFFFFFF, name: "White bookmark")];
+  test('Saving and getting Bookmarks', () async {
+    final List<Bookmark> bookmarks = [
+      Bookmark(id: 0, colorCode: 0xFF000000, name: "Black bookmark"),
+      Bookmark(id: 1, colorCode: 0xFFFFFFFF, name: "White bookmark")
+    ];
     final res = await quranRepository.saveBookmarks(bookmarks);
     expect(true, res);
 

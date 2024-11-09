@@ -4,11 +4,13 @@ import '../models/bookmark.dart';
 import '../repository/quran_repository.dart';
 
 class BookmarksCubit extends Cubit<List<Bookmark>> {
-  BookmarksCubit({QuranRepository? quranRepository}) : _quranRepository = quranRepository??QuranRepository(), super([]);
+  BookmarksCubit({QuranRepository? quranRepository})
+      : _quranRepository = quranRepository ?? QuranRepository(),
+        super([]);
 
   final QuranRepository _quranRepository;
   final Bookmark searchBookmark =
-  Bookmark(id: 3, colorCode: 0xFFF7EFE0, name: 'search Bookmark');
+      Bookmark(id: 3, colorCode: 0xFFF7EFE0, name: 'search Bookmark');
 
   final List<Bookmark> _defaultBookmarks = [
     Bookmark(id: 0, colorCode: 0xAAFFD354, name: 'العلامة الصفراء'),
@@ -18,10 +20,9 @@ class BookmarksCubit extends Cubit<List<Bookmark>> {
   List<Bookmark> bookmarks = [];
 
   void initBookmarks({List<Bookmark>? userBookmarks, bool overwrite = false}) {
-    if(overwrite) {
-      bookmarks= [...(userBookmarks??_defaultBookmarks), searchBookmark];
-    }
-    else {
+    if (overwrite) {
+      bookmarks = [...(userBookmarks ?? _defaultBookmarks), searchBookmark];
+    } else {
       bookmarks = _quranRepository.getBookmarks();
       if (bookmarks.isEmpty) {
         if (userBookmarks != null) {
@@ -41,8 +42,9 @@ class BookmarksCubit extends Cubit<List<Bookmark>> {
     required int bookmarkId,
     bool saveBookmark = true,
   }) {
-    final bookmarkIndex = bookmarks.indexWhere((bookmark) => bookmark.id == bookmarkId);
-    if(bookmarkIndex != -1) {
+    final bookmarkIndex =
+        bookmarks.indexWhere((bookmark) => bookmark.id == bookmarkId);
+    if (bookmarkIndex != -1) {
       bookmarks[bookmarkIndex].ayahId = ayahId;
       bookmarks[bookmarkIndex].page = page;
       if (saveBookmark) {
@@ -54,8 +56,9 @@ class BookmarksCubit extends Cubit<List<Bookmark>> {
   }
 
   removeBookmark(int bookmarkId, {bool saveBookmark = true}) {
-    final bookmarkIndex = bookmarks.indexWhere((bookmark) => bookmark.id == bookmarkId);
-    if(bookmarkIndex != -1) {
+    final bookmarkIndex =
+        bookmarks.indexWhere((bookmark) => bookmark.id == bookmarkId);
+    if (bookmarkIndex != -1) {
       bookmarks[bookmarkIndex].ayahId = -1;
       bookmarks[bookmarkIndex].page = -1;
       if (saveBookmark) {
