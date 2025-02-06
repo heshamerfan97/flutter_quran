@@ -10,14 +10,15 @@ import 'controllers/bookmarks_controller.dart';
 import 'controllers/quran_controller.dart';
 import 'models/quran_constants.dart';
 import 'models/quran_page.dart';
+
 part 'utils/images.dart';
 part 'utils/toast_utils.dart';
+part 'widgets/ayah_long_click_dialog.dart';
 part 'widgets/bsmallah_widget.dart';
+part 'widgets/default_drawer.dart';
 part 'widgets/quran_line.dart';
 part 'widgets/quran_page_bottom_info.dart';
 part 'widgets/surah_header_widget.dart';
-part 'widgets/default_drawer.dart';
-part 'widgets/ayah_long_click_dialog.dart';
 
 class FlutterQuranScreen extends StatelessWidget {
   const FlutterQuranScreen(
@@ -90,7 +91,11 @@ class FlutterQuranScreen extends StatelessWidget {
                                                       .ayahs[0]
                                                       .surahNameAr),
                                                   if (index == 1)
-                                                    const BasmallahWidget(),
+                                                    BasmallahWidget(
+                                                      surahNumber: pages[index]
+                                                          .ayahs[0]
+                                                          .surahNumber,
+                                                    ),
                                                   ...pages[index]
                                                       .lines
                                                       .map((line) {
@@ -174,7 +179,11 @@ class FlutterQuranScreen extends StatelessWidget {
                                                                 (line.ayahs[0]
                                                                         .surahNumber !=
                                                                     9))
-                                                              const BasmallahWidget(),
+                                                              BasmallahWidget(
+                                                                surahNumber: line
+                                                                    .ayahs[0]
+                                                                    .surahNumber,
+                                                              ),
                                                             SizedBox(
                                                               width: deviceSize
                                                                       .width -

@@ -6,6 +6,9 @@ void main() => runApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: Colors.blue,
+
+          // Set to `false` to prevent diacritic misalignment in Quranic text.
+          useMaterial3: false,
         ),
         home: const MyApp(),
       ),
