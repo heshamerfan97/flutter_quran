@@ -40,8 +40,8 @@ class _MyAppState extends State<MyApp> {
               padding: const EdgeInsetsDirectional.only(end: 22.0),
               child: GestureDetector(
                   onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (ctx) => SearchScreen())),
-                  child: Icon(Icons.search)),
+                      MaterialPageRoute(builder: (ctx) => const SearchScreen())),
+                  child: const Icon(Icons.search)),
             ),
           ],
         ),
@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ExpansionTile(
-                      title: Text("الجزء",
+                      title: const Text("الجزء",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       expandedCrossAxisAlignment: CrossAxisAlignment.start,
                       children: List.generate(
@@ -69,12 +69,12 @@ class _MyAppState extends State<MyApp> {
                                 child: Text(
                                   jozzs[index],
                                   textAlign: TextAlign.start,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ))),
                     ),
                     ExpansionTile(
-                      title: Text("الحزب",
+                      title: const Text("الحزب",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       expandedCrossAxisAlignment: CrossAxisAlignment.start,
                       children: List.generate(
@@ -87,12 +87,12 @@ class _MyAppState extends State<MyApp> {
                                 child: Text(
                                   hizbs[index],
                                   textAlign: TextAlign.start,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ))),
                     ),
                     ExpansionTile(
-                      title: Text("السورة",
+                      title: const Text("السورة",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       expandedCrossAxisAlignment: CrossAxisAlignment.start,
                       children: List.generate(
@@ -105,12 +105,12 @@ class _MyAppState extends State<MyApp> {
                                 child: Text(
                                   surahs[index],
                                   textAlign: TextAlign.start,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ))),
                     ),
                     ExpansionTile(
-                      title: Text("العلامات",
+                      title: const Text("العلامات",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       expandedCrossAxisAlignment: CrossAxisAlignment.start,
                       children: usedBookmarks
@@ -135,7 +135,7 @@ class _MyAppState extends State<MyApp> {
             );
           }),
         ),
-        body: FlutterQuranScreen(
+        body: const FlutterQuranScreen(
           useDefaultAppBar: false,
         ),
       ),
