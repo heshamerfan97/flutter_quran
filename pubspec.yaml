@@ -1,6 +1,6 @@
 name: flutter_quran
 description: "A Quran Package you can put in your app and it will work without the need for any other resources."
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/heshamerfan97/flutter_quran
 
 environment:
@@ -13,18 +13,18 @@ dependencies:
 
 
   # state management
-  bloc: ^8.1.4
-  flutter_bloc: ^8.1.6
+  bloc: ^9.0.0
+  flutter_bloc: ^9.0.0
 
 
   # local storage
-  shared_preferences: ^2.3.2
+  shared_preferences: ^	2.5.1
 
   #UI
-  fluttertoast: ^8.2.8
+  fluttertoast: ^8.2.11
 
   #Tools
-  intl: ^0.19.0
+  intl: ^0.20.2
 
 # This package supports all platforms listed below.
 # But note that it works and fits on mobile size devices

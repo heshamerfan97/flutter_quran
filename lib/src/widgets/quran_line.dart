@@ -41,7 +41,7 @@ class QuranLine extends StatelessWidget {
                     color: bookmarksAyahs.contains(ayah.id)
                         ? Color(bookmarks[bookmarksAyahs.indexOf(ayah.id)]
                                 .colorCode)
-                            .withOpacity(0.7)
+                            .withValues(alpha: 0.7)
                         : null,
                   ),
                   child: Text(

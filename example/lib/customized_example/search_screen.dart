@@ -17,7 +17,7 @@ class _SearchScreenState extends State<SearchScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('بحث'),
+          title: const Text('بحث'),
           centerTitle: true,
         ),
         body: SafeArea(
@@ -33,7 +33,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ayahs = [..._ayahs];
                     });
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
@@ -57,7 +57,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     FlutterQuran().navigateToAyah(ayah);
                                   },
                                 ),
-                                Divider(
+                                const Divider(
                                   color: Colors.grey,
                                   thickness: 1,
                                 ),
