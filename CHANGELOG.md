@@ -16,3 +16,9 @@
 * **Upgrading to Flutter 3.27.3**
 * **Updating deprecated values**
 * **Updating packages we depend on**
+
+
+## 0.0.4
+
+* **Fixing Basmallah in Surah Al-Qadr and Surah At-Tīn**
+* **Disable Material 3 in Quran Screen for better Quran Text displaying**
